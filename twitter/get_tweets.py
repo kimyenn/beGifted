@@ -14,7 +14,6 @@ import io
 import os
 import json
 
-
 #twitter setup
 ckey = os.getenv("TWITTER_CONSUMER_KEY")
 consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
