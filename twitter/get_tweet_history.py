@@ -52,7 +52,7 @@ def twitter_scrape(screen_name):
 	collection.insert(tweets)
 	# insert the information in the database
 
-	print "Successfully scraped: {}".format(screen_name)
+	print "Successfully scraped: {} at {}".format(time.asctime(time.localtime()), screen_name)
 
 #helper function to catch errors (unless interrupted by user) and rerun in 15 minutes
 def restart(name):
@@ -60,8 +60,8 @@ def restart(name):
 		twitter_scrape(name)
 	except KeyboardInterrupt:
 		print "KeyboardInterrupt"
-		return _scra
+		return
 	except:
-		print "Error encountered at {}, will try in 15 minutes".format(name)
-		time.sleep(900)
-		twitter_scrape(name)
+		print "Error encountered at {} on {}, will try in 5 minutes".format(time.asctime(time.localtime()),name)
+		time.sleep(300)
+		return
