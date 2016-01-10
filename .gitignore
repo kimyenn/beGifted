@@ -1,4 +1,5 @@
 data/
+.ipynb_checkpoints
 
 *.jpeg
 *.key
@@ -9,4 +10,3 @@ data/
 *.zip
 *.txt
 *.pkl
-
