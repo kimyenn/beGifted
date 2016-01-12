@@ -41,7 +41,7 @@ Using NLTK, analyze the sentiment (polarity score) of each user's tweets with [V
 Three different models were built and cross-validated in sci-kit learn. The best performing model was OneVsRest(LinearSVC()) which consistently returned an accuracy score of ~72%
 
 #### <u>Stage 6
-A Web App was built with Flask. See app/bootstrap directory
+A Web App was built with Flask. See app/bootstrap directory and Web App in Table of Contents
 
 #### <u>Stage 7
 Eventually, I would like the Web App built in Stage 6 to be hosted on AWS
@@ -73,8 +73,14 @@ The LinearSVC classification model's predict() only returns a single class. In o
 ## Web App
 To see how the Web App works, please look at the .ppt file in the images folder for a demonstration.
 
+To run the Web App locally, simply type:
+
+*from the app/bootstrap directory*
+<br>python build_model.py     <b> This will take a few minutes to run </b>
+<br>python run_app.py <b> in your browser, type 'localhost:8080'
+
 ## Improvements
-1. Add more retailers (currently at 75 retailers)
+1. Add more retailers (currently at ~75 retailers)
 2. Scrape additional sources for more accurate features like the websites of each company
 3. Incorporate other social media outlets (Instagram, Facebook, etc)
 4. Continuously include new Tweets from retailers
