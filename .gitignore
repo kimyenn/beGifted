@@ -1,10 +1,10 @@
 data/
 .ipynb_checkpoints
 
-*.jpeg
 *.key
 *.pdf
 *.pyc
 *.json
 *.zip
 *.pkl
+*.png
