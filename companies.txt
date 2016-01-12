@@ -1,0 +1,80 @@
+Aeria Games Fun Card,aeriagames
+Aeropostale,aeropostale
+Amazon.com,amazon
+Walmart,walmart
+Target,target
+Starbucks,starbucks
+Netflix,netflix
+eBay,ebay
+Fandango,fandango
+Disney,disney
+Macy's,macys
+Best Buy,bestbuy
+Sephora,sephora
+Ulta Beauty,ulta_beauty
+Home Depot,homedepot
+McDonald's,mcdonalds
+Costco,costco
+Chipotle,chipotletweets
+Etsy,etsy
+Lowe's,lowes
+Ikea,ikeausa
+Dunkin Donuts,dunkindonuts
+GameStop,gamestop
+Nordstrom,nordstrom
+Forever 21,forever21
+Ticketmaster,ticketmaster
+Whole Foods,wholefoods
+Apple,appstore
+iTunes,itunes
+H&M,hm
+Subway,subway
+Nike,nike
+Olive Garden,olivegarden
+REI,rei
+Toys R Us,toysrus
+Taco Bell,tacobell
+Chik-Fil-A,chickfila
+TJ Maxx,tjmaxx
+Red Lobster,redlobster
+Victoria's Secret,victoriassecret
+Cinemark,cinemark
+Old Navy,oldnavy
+Babies R Us,babiesrus
+Pizza Hut,pizzahut
+Sears,sears
+JCPenney,jcpenney
+QVC,qvc
+IHOP,ihop
+Kohl's,kohls
+Bath and Body Works,bathbodyworks
+Bed Bath and Beyond,bedbathbeyond
+Banana Republic,bananarepublic
+Gap,gap
+Michaels,michaelsstores
+Petsmart,petsmart
+Staples,staples
+Sports Authority,sportsauthority
+The Container Store,ContainerStore
+Lululemon,lululemon
+Urban Outfitters,urbanoutfitters
+Zappos.com,zappos
+The Cheesecake Factory,cheesecake
+Netflix,netflix
+Walgreens,walgreens
+CVS,cvs_extra
+hotels.com,hotelsdotcom
+Lush,lushcosmetics
+Barnes and Noble,BNBuzz
+Ann Taylor,AnnTaylor
+Williams-Sonoma,WilliamsSonoma
+Tiffany & Co,TiffanyAndCo
+Pier 1 Imports,pier1
+Guitar Center,guitarcenter
+Ace Hardware,AceHardware
+Coach,Coach
+Cabela's,Cabelas
+Lego,LEGO_Group
+Babys R Us,ToysRUs
+J Crew,
+The North Face,

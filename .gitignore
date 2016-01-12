@@ -4,9 +4,7 @@ data/
 *.jpeg
 *.key
 *.pdf
-*.ipynb
 *.pyc
 *.json
 *.zip
-*.txt
 *.pkl

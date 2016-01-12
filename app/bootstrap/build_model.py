@@ -1,3 +1,5 @@
+"add doc string for code XXX"
+
 import cPickle as pickle
 import pymongo
 import pandas as pd
@@ -6,57 +8,63 @@ from pymongo import MongoClient
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.naive_bayes import MultinomialNB
-# from collections import defaultdict
 from sklearn.multiclass import OneVsRestClassifier
 from nltk.stem.snowball import SnowballStemmer
 
+
 def remove_links_and_tags(words):
+    # Explain regex XXX
     if ('http' in words or '@' in words):
         return re.sub('(RT)|(RT @[_A-Za-z0-9]+)|(@[_A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)', '', words)
     return words
+
 
 def remove_links(words):
     if 'http' in words:
         return re.sub('([^0-9A-Za-z \t])|(\w+:\/\/\S+)', '', words)
     return words
 
+
 def remove_punctuation(sent):
     snowball = SnowballStemmer('english')
     translation_table = dict.fromkeys(map(ord, ')(][:.",!#&;$?'), None)
     return ' '.join([snowball.stem(word) for word in sent.translate(translation_table).split()])
 
+
 # after stemming
 def remove_irrelevant_terms(words):
+    # removes exact matches of sorri, pleas, thank, thx, hi, fave, dm, amp
     return re.sub('\\bsorri\\b|\\bpleas\\b|\\bthank\\b|\\nthx\\b|\\bhi\\b|\\bfave\\b|\\bdm\\b|\\bamp\\b', '', words)
+
 
 def get_company_df():
     '''
-    INPUT: None
-    OUTPUT: dataframe where columns are ['company', 'text', 'simple_text', 'stemmed_text', stripped_text]
+    DESCRIPTION: Retrieves information of all companies in MongoDB and extracts relevant information
 
-    DESCRIPTION: Retrieves information of all companies in MonoDB and extracts relevant information
+    INPUT: None
+    OUTPUT: dataframe where columns are ['company', 'text', 'simple_text', 'stemmed_text', 'stripped_text']
     '''
 
     ### code to read from MongoDB
     mc = MongoClient()
     db = mc.twitter_db
     input_data = db.tweets_by_companies
-    data = pd.DataFrame(list(input_data.find()))
+    df_companies = pd.DataFrame(list(input_data.find()))
 
-    data['company'] = data['user'].apply(lambda x: x['name'])
+    df_companies['company'] = df_companies['user'].apply(lambda x: x['name'])
 
     # exclude replies which are usually apologies to concerned customers
-    data = data[data['in_reply_to_screen_name'].isnull() == True]
+    df_companies = df_companies[df_companies['in_reply_to_screen_name'].isnull()]
 
     # remove unncessary information
-    data['simple_text'] = data['text'].apply(lambda tweet: remove_links_and_tags(tweet))
-    data['stemmed_text'] = data['simple_text'].apply(lambda tweet: remove_punctuation(tweet))
-    data['stripped_text'] = data['stemmed_text'].apply(lambda tweet: remove_irrelevant_terms(tweet))
-    return data
+    df_companies['simple_text'] = df_companies['text'].apply(lambda tweet: remove_links_and_tags(tweet))
+    df_companies['stemmed_text'] = df_companies['simple_text'].apply(lambda tweet: remove_punctuation(tweet))
+    df_companies['stripped_text'] = df_companies['stemmed_text'].apply(lambda tweet: remove_irrelevant_terms(tweet))
+    return df_companies
+
 
 def build_MultinomialNB(company_tweets):
     ### code to build a NB model
-    #df = pd.read_csv(open(filename,'rU'), encoding='utf-8', engine='c')
 
     X = company_tweets['stripped_text']
     y = company_tweets['company']
@@ -65,6 +73,7 @@ def build_MultinomialNB(company_tweets):
     clf = MultinomialNB()
     clf.fit(cv, y)
     return count_vectorizer, clf
+
 
 def build_OvR_LinearSVC(company_tweets):
     X = company_tweets['stripped_text']
