@@ -35,7 +35,7 @@ Store the Tweets as .json objects in MongoDB. See get_tweet_history.py and set t
 In Pandas, conduct EDA and data cleaning
 
 #### <u>Stage 4
-Using NLTK, analyze the sentiment (polarity score) of each user's tweets with [Vader](http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf) which results in a breakdown of how neutral, negative, and positive a Tweet is where the sum of all three is 1. Only non-negative Tweets ('neg' < .45 -- this cutoff is an assumption made on my part) from the user are included in the analysis for gift card recommendations. This prevents any recommendations being made based on negative Tweets.
+Using NLTK, analyze the sentiment (polarity score) of each user's tweets with [Vader](http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf) which results in a breakdown of how neutral, negative, and positive a Tweet is where the sum of all three is 1. Only non-negative Tweets ('neg' < .45 -- this cutoff was made subjectively due to time limitations) from the user are included in the analysis for gift card recommendations. This prevents any recommendations being made based on negative Tweets.
 
 #### <u>Stage 5
 Three different models were built and cross-validated in sci-kit learn. The best performing model was OneVsRest(LinearSVC()) which consistently returned an accuracy score of ~72%
@@ -77,7 +77,7 @@ To run the Web App locally, simply type:
 
 *from the app/bootstrap directory*
 <br>python build_model.py     <b> This will take a few minutes to run </b>
-<br>python run_app.py <b> in your browser, type 'localhost:8080'
+<br>python run_app.py <b>Then in your browser, type 'localhost:8080' </b>
 
 ## Improvements
 1. Add more retailers (currently at ~75 retailers)
