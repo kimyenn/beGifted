@@ -63,15 +63,18 @@ The Tweets for a specific user are scraped, **simplified** (links removed), anal
 The model utilized by beGifted is the [OneVsRestClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html) with [LinearSVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). All the Tweets from retailers were split into training and testing sets. The Tweets in the training set were fed into a TFIDF vectorizer and fit to the OneVsRest model with the company's name as the label. The model then predicted on the testing set with an accuracy of 73%.
 
 ![OvR_model](./images/OvR.jpg)
-INSERT ROC CURVE GRAPH
 
+#### ROC Curves
+The ROC curves can be seen below for each of the 75 classes in the model. Labels were intentionally excluded as having them makes the graph even less interpretable. The original code used to produce the graph can be found [here](http://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html) with few modifications made. The importance of this graph is to show that the model works well for a majority of the stores with few exceptions. With additional data and better feature engineering, all the ROC curves would improve greatly.
+<br><br>![ROC_curves](./images/ROC_curves.jpg)
 #### Important Features
 The model identified important features for each retailers in order to make recommendations, below is a snippet of the top 10 words for three of the retailers
 
 ![OvR_model](./images/feature_importance.jpg)
 
 A word cloud which shows the top features utilized by the model. It is obvious that there are some clear connections between keywords (post stemming) and retailers. For example, **'optoutsid'** is REI, **'tripletreatbox'** is PizzaHut, **'justdoit'** is Nike, etc.
-![word_cloud](./images/ribbon_whitebg.jpg)
+
+<br>![word_cloud](./images/ribbon_whitebg.jpg)
 
 #### Predictions from Decision Function
 When predictions are made for a Twitter user, the user's stemmed_text is aggregated into a single document and transformed into a TFIDF to be used by the model.
