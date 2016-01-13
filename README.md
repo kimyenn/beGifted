@@ -35,16 +35,16 @@ Store the Tweets as .json objects in MongoDB. See get_tweet_history.py and set t
 In Pandas, conduct EDA and data cleaning
 
 #### <u>Stage 4
-Using NLTK, analyze the sentiment (polarity score) of each user's tweets with [Vader](http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf) which results in a breakdown of how neutral, negative, and positive a Tweet is where the sum of all three is 1. Only non-negative Tweets ('neg' < .45 -- this cutoff was made subjectively due to time limitations) from the user are included in the analysis for gift card recommendations. This prevents any recommendations being made based on negative Tweets.
+Using NLTK, analyze the sentiment (polarity score) of each user's tweets with [Vader](http://www.nltk.org/_modules/nltk/sentiment/vader.html) which results in a breakdown of how neutral, negative, and positive a Tweet is where the sum of all three is 1. Only non-negative Tweets ('neg' < .45 -- this cutoff was made subjectively due to time limitations) from the user are included in the analysis for gift card recommendations. This prevents any recommendations being made based on negative Tweets.
 
 #### <u>Stage 5
 Three different models were built and cross-validated in sci-kit learn. The best performing model was OneVsRest(LinearSVC()) which consistently returned an accuracy score of ~72%
 
 #### <u>Stage 6
-A Web App was built with Flask. See app/bootstrap directory and Web App in Table of Contents
+A Web App was built with Flask. See app/bootstrap directory and Web App in Table of Contents for additional information
 
 #### <u>Stage 7
-Eventually, I would like the Web App built in Stage 6 to be hosted on AWS
+Eventually, have Web App built in Stage 6 to be hosted on AWS
 
 ## Data
 
@@ -60,15 +60,20 @@ The Tweets for a specific user are scraped, **simplified** (links removed), anal
 
 ## Model
 #### Training and Testing
-The model utilized by beGifted is the [OneVsRestClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html) with [LinearSVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). All the Tweets from retailers were split into training and testing sets. The Tweets in the training set were fed into a TFIDF vectorizer and fit to the OneVsRest model with the company_name as the label. The model then predicted on the testing set with an accuracy of 73%.
+The model utilized by beGifted is the [OneVsRestClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html) with [LinearSVC](http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html). All the Tweets from retailers were split into training and testing sets. The Tweets in the training set were fed into a TFIDF vectorizer and fit to the OneVsRest model with the company's name as the label. The model then predicted on the testing set with an accuracy of 73%.
 
 ![OvR_model](./images/OvR.jpg)
 INSERT ROC CURVE GRAPH
 
+#### Important Features
+The model identified important features for each retailers in order to make recommendations, below is a snippet of the top 10 words for three of the retailers
+
+![OvR_model](./images/feature_importance.jpg)
+
 #### Predictions from Decision Function
 When predictions are made for a Twitter user, the user's stemmed_text is aggregated into a single document and transformed into a TFIDF to be used by the model.
 
-The LinearSVC classification model's predict() only returns a single class. In order to obtain the top 3 most likely classes (retailers) for each user outside of the testing set, the decision_function() was called instead of predict() -- see twitter_predictions() in run_app.py.
+The LinearSVC classification model's predict() only returns a single class. In order to obtain the top 3 most likely classes (retailers) for each user, the decision_function() was called instead of predict() -- see twitter_predictions() in run_app.py.
 
 ## Web App
 To see how the Web App works, please look at the .ppt file in the images folder for a demonstration.

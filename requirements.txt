@@ -1,0 +1,9 @@
+Flask=0.10.1
+tweepy=3.5.0
+scikit-learn=0.17
+mongodb=2.4.6
+pymongo=3.0.3
+nltk=3.1
+numpy=1.10.1
+pandas=0.17.0
+cPickle>=1.5
