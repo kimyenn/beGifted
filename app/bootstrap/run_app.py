@@ -1,4 +1,6 @@
-"DOC string for flask app XXX"
+'''This file should only be run after build_model.py otherwise there would be nothing to unpickle.
+Run this file to launch the web app
+'''
 
 from flask import Flask, render_template, request
 app = Flask(__name__)

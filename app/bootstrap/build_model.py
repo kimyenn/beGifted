@@ -1,4 +1,4 @@
-"add doc string for code XXX"
+'''Cleans the companies dataframe and builds the necessary OneVsRestClassifier Model used by the web app'''
 
 import cPickle as pickle
 import pymongo
@@ -13,7 +13,6 @@ from nltk.stem.snowball import SnowballStemmer
 
 
 def remove_links_and_tags(words):
-    # Explain regex XXX
     if ('http' in words or '@' in words):
         return re.sub('(RT)|(RT @[_A-Za-z0-9]+)|(@[_A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)', '', words)
     return words
