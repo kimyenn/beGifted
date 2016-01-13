@@ -1,4 +1,4 @@
-beGifted
+beGifted <img src=./images/ribbon_whitebg.jpg width="45">
 ======
 A recommender which makes personalized gift card recommendations based on a user's Twitter history. An individual can go to the web app, enter in a Twitter account of someone they need to buy a gift for and the model will produce the top three recommendations for that Twitter user.
 
@@ -22,28 +22,28 @@ To produce a less stressful process for the purchaser and a more enjoyable gift 
 
 ![beGifted_Pipeline](./images/Pipeline.004.jpg)
 
-#### <u>Stage 0</u>
+#### __Stage 0__
 Research on popular retailers who are widely available throughout the US. To name a few resources: [National Gift Card](http://www.ngc-group.com/), [CardHub](http://www.cardhub.com/edu/8-things-to-know-about-gift-cards/), and [GiftCardNanny](http://www.giftcardgranny.com/statistics/). This resulted in companies.txt which contains the names and Twitter Handles of all the retailers in beGifted
 
-#### <u>Stage 1</u>
+#### Stage 1
 Twitter was chosen as the social media to scrape and base the recommender on because Twitter is simple to use and each Tweet is limited to 140 characters resulting in concise, to the point messages. Retailers and random users were scraped from Twitter using [Tweepy](https://github.com/tweepy/tweepy) See get_tweet_history.py. Random users were found with get_random_tweets.py
 
-#### <u>Stage 2</u>
+#### Stage 2
 Store the Tweets as .json objects in MongoDB. See get_tweet_history.py and set the user flag to False in twitter_scrape()
 
-#### <u>Stage 3</u>
+#### Stage 3
 In Pandas, conduct EDA and data cleaning
 
-#### <u>Stage 4</u>
+#### Stage 4
 Using NLTK, analyze the sentiment (polarity score) of each user's tweets with [Vader](http://www.nltk.org/_modules/nltk/sentiment/vader.html) which results in a breakdown of how neutral, negative, and positive a Tweet is where the sum of all three is 1. Only non-negative Tweets ('neg' < .45 -- this cutoff was made subjectively due to time limitations) from the user are included in the analysis for gift card recommendations. This prevents any recommendations being made based on negative Tweets.
 
-#### <u>Stage 5</u>
+#### Stage 5
 Three different models were built and cross-validated in sci-kit learn. The best performing model was OneVsRest(LinearSVC()) which consistently returned an accuracy score of ~72%
 
-#### <u>Stage 6</u>
+#### Stage 6
 A Web App was built with Flask. See app/bootstrap directory and Web App in Table of Contents for additional information
 
-#### <u>Stage 7</u>
+#### Stage 7
 Eventually, have Web App built in Stage 6 to be hosted on AWS
 
 ## Data
@@ -69,6 +69,9 @@ INSERT ROC CURVE GRAPH
 The model identified important features for each retailers in order to make recommendations, below is a snippet of the top 10 words for three of the retailers
 
 ![OvR_model](./images/feature_importance.jpg)
+
+A word cloud which shows the top features utilized by the model. It is obvious that there are some clear connections between keywords (post stemming) and retailers. For example, **'optoutsid'** is REI, **'tripletreatbox'** is PizzaHut, **'justdoit'** is Nike, etc.
+![word_cloud](./images/ribbon_whitebg.jpg)
 
 #### Predictions from Decision Function
 When predictions are made for a Twitter user, the user's stemmed_text is aggregated into a single document and transformed into a TFIDF to be used by the model.
